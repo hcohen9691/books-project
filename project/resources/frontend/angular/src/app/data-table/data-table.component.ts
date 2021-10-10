@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Book } from '../models/book';
-import { BookService } from '../services/Book.service';
+import { Book } from '../book';
+import { BookService } from '../book.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { BookFormDialogComponent } from '../Book-form-dialog/Book-form-dialog.component';
 
@@ -21,7 +21,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public displayedColumns: string[] = ['id', 'title', 'content', 'updated_at', 'created_at'];
+  public displayedColumns: string[] = ['id', 'name', 'author', 'updated_at', 'created_at'];
   public columnsToDisplay: string[] = [...this.displayedColumns, 'actions'];
 
   public columnsFilters = {};
@@ -35,7 +35,7 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   edit(data: Book) {
     const dialogRef = this.dialog.open(BookFormDialogComponent, {
-      width: '400px',
+      width: '800px',
       data: data
     });
 
@@ -58,11 +58,11 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   add() {
     const dialogRef = this.dialog.open(BookFormDialogComponent, {
-      width: '400px',
+      width: '800px',
       data: {
         id: '',
-        title: '',
-        content: '',
+        name: '',
+        author: '',
         updated_at: '',
         created_at: ''
       }
@@ -70,7 +70,6 @@ export class DataTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        result.created_at = new Date().toISOString();
         this.BookService.add(result);
       }
     });

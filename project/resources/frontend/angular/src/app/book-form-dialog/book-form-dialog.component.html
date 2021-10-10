@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>{{!!data.id ? 'Edit' : 'Create'}} Book</h1>
+<h1 mat-dialog-title>{{data.id ? 'Update' : 'Create'}} Book</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="formInstance">
-        <div class="mt-5" *ngIf="!!data.id">
+        <div class="mt-5" *ngIf="data.id">
             <mat-form-field class="fullWidth" appearance="outline">
                 <mat-label>ID *</mat-label>
                 <input matInput type="text" name="id" formControlName="id" />
@@ -13,19 +13,19 @@
 
         <div class="mt-5">
             <mat-form-field class="fullWidth" appearance="outline">
-                <mat-label>Title *</mat-label>
-                <input matInput type="text" name="title" formControlName="title" />
+                <mat-label>Name *</mat-label>
+                <input matInput type="text" name="name" formControlName="name" />
                 <mat-error *ngIf="
-        formInstance.controls['title']?.errors?.required">field required</mat-error>
+        formInstance.controls['name']?.errors?.required">field required</mat-error>
             </mat-form-field>
         </div>
 
         <div class="mt-5">
             <mat-form-field class="fullWidth" appearance="outline">
-                <mat-label>Content *</mat-label>
-                <input matInput type="text" name="content" formControlName="content" />
+                <mat-label>Author *</mat-label>
+                <input matInput type="text" name="author" formControlName="author" />
                 <mat-error *ngIf="
-                    formInstance.controls['content']?.errors?.required">field required</mat-error>
+                    formInstance.controls['author']?.errors?.required">field required</mat-error>
             </mat-form-field>
         </div>
 
@@ -34,23 +34,23 @@
                 <mat-label>Updated at *</mat-label>
                 <input matInput type="text" name="updated_at" formControlName="updated_at" />
                 <mat-error *ngIf="
-                            formInstance.controls['updated_at']?.errors?.required">field required</mat-error>
+                                    formInstance.controls['updated_at']?.errors?.required">field required</mat-error>
             </mat-form-field>
         </div>
-
+        
         <div class="mt-5" *ngIf="!!data.id">
             <mat-form-field class="fullWidth" appearance="outline">
                 <mat-label>Created at *</mat-label>
                 <input matInput type="text" name="created_at" formControlName="created_at" />
                 <mat-error *ngIf="
-                            formInstance.controls['created_at']?.errors?.required">field required</mat-error>
+                                    formInstance.controls['created_at']?.errors?.required">field required</mat-error>
             </mat-form-field>
         </div>
     </form>
 </div>
 
 <div class="mt-5" mat-dialog-actions>
-    <button mat-raised-button color="primary" [disabled]="formInstance.dirty && formInstance.errors" (click)="save()"
-        cdkFocusInitial>{{!!data.id ? 'Update' : 'Create'}}</button>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" [disabled]="formInstance.dirty && formInstance.errors" (click)="save()"
+        cdkFocusInitial>{{data.id ? 'Update' : 'Create'}}</button>
+    <button mat-button mat-dialog-close>Cancel</button>
 </div>

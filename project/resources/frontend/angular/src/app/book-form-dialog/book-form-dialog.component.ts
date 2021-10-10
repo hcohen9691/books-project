@@ -2,7 +2,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Book } from '../models/book';
+import { Book } from '../book';
 
 
 @Component({
@@ -20,10 +20,10 @@ export class BookFormDialogComponent {
     
     this.formInstance = new FormGroup({
       "id": new FormControl({ value: '', disabled: !!data.id ? true: false }, Validators.required),
-      "title": new FormControl('', Validators.required),
-      "content": new FormControl('', Validators.required),
+      "name": new FormControl('', Validators.required),
+      "author": new FormControl('', Validators.required),
       "updated_at": new FormControl({ value: '', disabled: !!data.updated_at ? true : false }, Validators.required),
-      "created_at": new FormControl({ value: '', disabled: !!data.created_at ? true : false}, Validators.required),
+      "created_at": new FormControl({ value: '', disabled: !!data.created_at ? true : false }, Validators.required),
     });
 
     this.formInstance.setValue(data);
@@ -32,8 +32,8 @@ export class BookFormDialogComponent {
   save(): void {
     let book: Book = Object.assign(new Book(), {
       id: this.data.id,
-      title: this.formInstance.value.title,
-      content: this.formInstance.value.content,
+      name: this.formInstance.value.name,
+      author: this.formInstance.value.author,
       updated_at: new Date().toISOString(),
       created_at: this.data.created_at,
     });
